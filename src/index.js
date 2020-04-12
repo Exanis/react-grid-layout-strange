@@ -1,17 +1,30 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import GridLayout from "react-grid-layout";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+class MyFirstGrid extends React.Component {
+  render() {
+    // layout is an array of objects, see the demo for more complete usage
+    const layout = [
+      { i: "a", x: 0, y: 0, w: 1, h: 2, static: true },
+      { i: "b", x: 1, y: 0, w: 3, h: 2, minW: 2, maxW: 4 },
+      { i: "c", x: 4, y: 0, w: 1, h: 2 }
+    ];
+    return (
+      <GridLayout
+        className="layout"
+        layout={layout}
+        cols={12}
+        rowHeight={30}
+        width={1200}
+      >
+        <div key="a">a</div>
+        <div key="b">b</div>
+        <div key="c">c</div>
+      </GridLayout>
+    );
+  }
+}
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+const contentDiv = document.getElementById("root");
+ReactDOM.render(React.createElement(MyFirstGrid), contentDiv);
